@@ -3,32 +3,25 @@
 	"id": "npa",
 	"version": "${version}",
 	"name": "No Pickup Animation",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Removes the pickup animation from items",
 	"authors": [
-		"Me!"
+		"DerpDerpling"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/DerpDerpling/NoPickupAnimation"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/npa/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"derp.npa.ExampleMod"
+			"derp.npa.NoPickupAnimation"
 		]
 	},
 	"mixins": [
 		"npa.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.6",
-		"minecraft": "~1.19",
-		"java": ">=17",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
+		"minecraft": ">=1.15-"
 	}
 }
