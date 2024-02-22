@@ -22,9 +22,6 @@
 		"npa.mixins.json"
 	],
 	"depends": {
-		"minecraft": ">=1.17-"
-	},
-	"breaks": {
-		"minecraft": ">=1.19.4"
+		"minecraft": "1.19.4"
 	}
 }

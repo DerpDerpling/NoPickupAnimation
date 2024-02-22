@@ -1,9 +1,9 @@
 package derp.npa.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -20,17 +20,21 @@ public class RemovePickupAnimationMixin {
     @Final
     @Shadow
     private final MinecraftClient client;
+    @Mutable
+    @Final
+    @Shadow
+    private final ItemRenderer itemRenderer;
 
-    public RemovePickupAnimationMixin(MinecraftClient client) {
+    public RemovePickupAnimationMixin(MinecraftClient client, ItemRenderer itemRenderer) {
         this.client = client;
+        this.itemRenderer = itemRenderer;
     }
 
     @Inject(method = "renderHotbarItem", at = @At("HEAD"), cancellable = true)
-    private void renderHotbarItemMixin(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed, CallbackInfo ci) {
-        if (!stack.isEmpty()) {
-            this.client.getItemRenderer().renderInGui(stack, x, y);
-            RenderSystem.setShader(GameRenderer::getPositionColorShader);
-            this.client.getItemRenderer().renderGuiItemOverlay(this.client.textRenderer, stack, x, y);
+    private void renderHotbarItemMixin(MatrixStack matrixStack, int i, int j, float f, PlayerEntity playerEntity, ItemStack itemStack, int k, CallbackInfo ci) {
+        if (!itemStack.isEmpty()) {
+            this.itemRenderer.renderInGuiWithOverrides(matrixStack, playerEntity, itemStack, i, j, k);
+            this.itemRenderer.renderGuiItemOverlay(matrixStack, this.client.textRenderer, itemStack, i, j);
             ci.cancel();
         }
     }
