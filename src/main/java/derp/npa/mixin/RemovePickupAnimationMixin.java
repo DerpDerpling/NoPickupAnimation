@@ -1,9 +1,9 @@
 package derp.npa.mixin;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -31,10 +31,10 @@ public class RemovePickupAnimationMixin {
     }
 
     @Inject(method = "renderHotbarItem", at = @At("HEAD"), cancellable = true)
-    private void renderHotbarItemMixin(MatrixStack matrixStack, int i, int j, float f, PlayerEntity playerEntity, ItemStack itemStack, int k, CallbackInfo ci) {
-        if (!itemStack.isEmpty()) {
-            this.itemRenderer.renderInGuiWithOverrides(matrixStack, playerEntity, itemStack, i, j, k);
-            this.itemRenderer.renderGuiItemOverlay(matrixStack, this.client.textRenderer, itemStack, i, j);
+    private void renderHotbarItemMixin(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed, CallbackInfo ci) {
+        if (!stack.isEmpty()) {
+            context.drawItem(player, stack, x, y, seed);
+            context.drawItemInSlot(this.client.textRenderer, stack, x, y);
             ci.cancel();
         }
     }
