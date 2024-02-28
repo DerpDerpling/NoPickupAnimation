@@ -3,7 +3,6 @@ package derp.npa.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -20,14 +19,9 @@ public class RemovePickupAnimationMixin {
     @Final
     @Shadow
     private final MinecraftClient client;
-    @Mutable
-    @Final
-    @Shadow
-    private final ItemRenderer itemRenderer;
 
-    public RemovePickupAnimationMixin(MinecraftClient client, ItemRenderer itemRenderer) {
+    public RemovePickupAnimationMixin(MinecraftClient client) {
         this.client = client;
-        this.itemRenderer = itemRenderer;
     }
 
     @Inject(method = "renderHotbarItem", at = @At("HEAD"), cancellable = true)
