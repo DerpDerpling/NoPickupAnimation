@@ -16,6 +16,10 @@ public class ItemPickupParticleMixin extends Particle {
     protected ItemPickupParticleMixin(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
     }
+    /**
+     * @author DerpDerpling
+     * @reason makes the item not have a pickup animation.
+     */
     @Overwrite
     public void tick() {
             this.markDead();
