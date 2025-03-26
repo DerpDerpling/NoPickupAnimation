@@ -26,9 +26,10 @@ public class ItemPickupParticleMixin extends Particle {
     }
 
     @Override
-    public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        //nothing is needed here lol
+    public void render(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
+        //do nothing
     }
+
 
     @Shadow
     public ParticleTextureSheet getType() {

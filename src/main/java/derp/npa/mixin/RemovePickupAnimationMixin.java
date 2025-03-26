@@ -29,7 +29,7 @@ public class RemovePickupAnimationMixin {
     private void renderHotbarItemMixin(DrawContext context, int x, int y, RenderTickCounter tickCounter, PlayerEntity player, ItemStack stack, int seed, CallbackInfo ci) {
         if (!stack.isEmpty()) {
             context.drawItem(player, stack, x, y, seed);
-            context.drawItemInSlot(this.client.textRenderer, stack, x, y);
+            context.drawStackOverlay(this.client.textRenderer, stack, x, y);
             ci.cancel();
         }
     }
