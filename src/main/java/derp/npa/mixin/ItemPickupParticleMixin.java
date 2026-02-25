@@ -26,14 +26,8 @@ public class ItemPickupParticleMixin extends Particle {
     }
 
     @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        //do nothing
-    }
-
-
-    @Shadow
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.CUSTOM;
+    public ParticleTextureSheet textureSheet() {
+        return ParticleTextureSheet.ITEM_PICKUP;
     }
 }
 
